@@ -1,13 +1,14 @@
-FirstWordGPT 🧠
+🧠 FirstWordGPT
+
 Training a GPT-Style Language Model from Scratch using Project Gutenberg
 
-FirstWordGPT is a complete, end-to-end implementation of a GPT-style language model trained entirely from scratch using PyTorch and SentencePiece, without relying on any pretrained models or high-level frameworks.
+FirstWordGPT is a complete, end-to-end implementation of a GPT-style language model trained entirely from scratch, using PyTorch and SentencePiece, without relying on pretrained models or high-level frameworks.
 
-The name FirstWordGPT reflects the core idea of this project: learning how a language model predicts the very next word, step by step, until coherent language emerges.
+The name FirstWordGPT reflects the core idea of this project:
 
-This project is built for educational and experimental purposes, with the explicit goal of understanding how modern large language models are created internally — from raw text to a working autoregressive transformer.
+learning how a language model predicts the very next word, step by step, until coherent language emerges.
 
-The full pipeline is implemented manually: dataset collection, cleaning, tokenization, model training, checkpointing, and text generation.
+This project is built for educational and experimental purposes, with the explicit goal of understanding how modern large language models are created internally — from raw text to a working autoregressive Transformer.
 
 If you understand this repository, you understand how GPT-style models actually work.
 
@@ -25,12 +26,12 @@ Mixed Precision (AMP) training support
 
 Learning-rate warmup + cosine decay
 
-Checkpoint saving and resume capability
+Checkpoint saving & resume capability
 
 Autoregressive text generation from trained checkpoints
 
 📊 Model & Dataset Details
-Model Architecture
+🧠 Model Architecture
 Component	Value
 Parameters	~22.8M
 Layers	8 Transformer blocks
@@ -39,27 +40,22 @@ Embedding Size	256
 Context Length	256 tokens
 Vocabulary Size	8,000 (BPE)
 Architecture	Decoder-only GPT
-Dataset
+📚 Dataset
 Item	Value
 Source	Project Gutenberg
 Books	~5,000
-Clean text size	~1.24 GB
-Total tokens	~300 million
+Clean Text Size	~1.24 GB
+Total Tokens	~300 million
 Avg chars/token	~4.1
 License	Public Domain
 🧪 Sample Output
-
 Prompt
-
 Abhijit went to the market to buy some fresh vegetables. On his way, he met
 
-
 Generated
-
 a large family of his own, and of the most beautiful of them had come to see him.
 The chief was the first to get a large piece of bread with his wife, and the rest
 of the family gathered around the table...
-
 
 The model demonstrates:
 
@@ -105,7 +101,7 @@ CUDA-enabled GPU (recommended)
 
 SentencePiece
 
-Install dependencies
+Install Dependencies
 pip install torch sentencepiece tqdm
 
 📥 Step-by-Step: Train FirstWordGPT from Scratch
@@ -141,6 +137,7 @@ python train_tokenizer.py
 Outputs:
 
 gutenberg_bpe.model
+
 gutenberg_bpe.vocab
 
 5️⃣ Tokenize Dataset (One-Time)
