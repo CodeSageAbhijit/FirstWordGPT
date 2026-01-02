@@ -1,71 +1,90 @@
-🧠 FirstWordGPT
+---
 
-Training a GPT-Style Language Model from Scratch using Project Gutenberg
+# 🧠 FirstWordGPT
 
-FirstWordGPT is a complete, end-to-end implementation of a GPT-style language model trained entirely from scratch, using PyTorch and SentencePiece, without relying on pretrained models or high-level frameworks.
+**Training a GPT-Style Language Model from Scratch using Project Gutenberg**
 
-The name FirstWordGPT reflects the core idea of this project:
+FirstWordGPT is a complete, **end-to-end implementation of a GPT-style language model trained entirely from scratch**, using **PyTorch** and **SentencePiece**, without relying on pretrained models or high-level frameworks.
 
-learning how a language model predicts the very next word, step by step, until coherent language emerges.
+The name **FirstWordGPT** reflects the core idea of this project:
 
-This project is built for educational and experimental purposes, with the explicit goal of understanding how modern large language models are created internally — from raw text to a working autoregressive Transformer.
+> learning how a language model predicts the *very next word*, step by step, until coherent language emerges.
 
-If you understand this repository, you understand how GPT-style models actually work.
+This project is built for **educational and experimental purposes**, with the explicit goal of understanding how modern large language models are created internally — **from raw text to a working autoregressive Transformer**.
 
-🚀 Project Overview
+> **If you understand this repository, you understand how GPT-style models actually work.**
 
-Trained a GPT-style Transformer from scratch
+---
 
-Uses Project Gutenberg public-domain books
+## 🚀 Project Overview
 
-Custom SentencePiece BPE tokenizer
+* Trained a **GPT-style Transformer from scratch**
+* Uses **Project Gutenberg** public-domain books
+* Custom **SentencePiece BPE tokenizer**
+* Pure **PyTorch** implementation (no pretrained models)
+* Mixed Precision (**AMP**) training support
+* Learning-rate **warmup + cosine decay**
+* Checkpoint saving & resume capability
+* Autoregressive text generation from trained checkpoints
 
-Pure PyTorch implementation (no pretrained models)
+---
 
-Mixed Precision (AMP) training support
+## 📊 Model & Dataset Details
 
-Learning-rate warmup + cosine decay
+### 🧠 Model Architecture
 
-Checkpoint saving & resume capability
+| Component       | Value                |
+| --------------- | -------------------- |
+| Parameters      | ~22.8M               |
+| Layers          | 8 Transformer blocks |
+| Attention Heads | 8                    |
+| Embedding Size  | 256                  |
+| Context Length  | 256 tokens           |
+| Vocabulary Size | 8,000 (BPE)          |
+| Architecture    | Decoder-only GPT     |
 
-Autoregressive text generation from trained checkpoints
+---
 
-📊 Model & Dataset Details
-🧠 Model Architecture
-Component	Value
-Parameters	~22.8M
-Layers	8 Transformer blocks
-Attention Heads	8
-Embedding Size	256
-Context Length	256 tokens
-Vocabulary Size	8,000 (BPE)
-Architecture	Decoder-only GPT
-📚 Dataset
-Item	Value
-Source	Project Gutenberg
-Books	~5,000
-Clean Text Size	~1.24 GB
-Total Tokens	~300 million
-Avg chars/token	~4.1
-License	Public Domain
-🧪 Sample Output
-Prompt
+### 📚 Dataset
+
+| Item            | Value             |
+| --------------- | ----------------- |
+| Source          | Project Gutenberg |
+| Books           | ~5,000            |
+| Clean Text Size | ~1.24 GB          |
+| Total Tokens    | ~300 million      |
+| Avg chars/token | ~4.1              |
+| License         | Public Domain     |
+
+---
+
+## 🧪 Sample Output
+
+### Prompt
+
+```text
 Abhijit went to the market to buy some fresh vegetables. On his way, he met
+```
 
-Generated
+### Generated
+
+```text
 a large family of his own, and of the most beautiful of them had come to see him.
 The chief was the first to get a large piece of bread with his wife, and the rest
 of the family gathered around the table...
+```
 
-The model demonstrates:
+### The model demonstrates:
 
-Sentence-level coherence
+* Sentence-level coherence
+* Narrative continuation
+* Long-form structure within context limits
 
-Narrative continuation
+---
 
-Long-form structure within context limits
+## 📁 Project Structure
 
-📁 Project Structure
+```text
 FirstWordGPT/
 ├── checkpoints/
 │   └── latest.pt              # Training checkpoint
@@ -89,85 +108,120 @@ FirstWordGPT/
 ├── gutenberg_bpe.model        # Tokenizer model
 ├── gutenberg_bpe.vocab        # Tokenizer vocab
 └── README.md
+```
 
-🛠️ Installation
-Requirements
+---
 
-Python 3.10+
+## 🛠️ Installation
 
-PyTorch 2.0+
+### Requirements
 
-CUDA-enabled GPU (recommended)
+* Python **3.10+**
+* PyTorch **2.0+**
+* CUDA-enabled GPU *(recommended)*
+* SentencePiece
 
-SentencePiece
+### Install Dependencies
 
-Install Dependencies
+```bash
 pip install torch sentencepiece tqdm
+```
 
-📥 Step-by-Step: Train FirstWordGPT from Scratch
-1️⃣ Download Project Gutenberg Books
+---
+
+## 📥 Step-by-Step: Train FirstWordGPT from Scratch
+
+### 1️⃣ Download Project Gutenberg Books
+
+```bash
 python dataset_downloader.py
+```
 
-2️⃣ Clean Gutenberg Headers & Footers
+---
+
+### 2️⃣ Clean Gutenberg Headers & Footers
+
+```bash
 python data_cleaning.py
-
+```
 
 Removes:
 
-License text
+* License text
+* Metadata
+* Boilerplate
+* Excess blank lines
 
-Metadata
+---
 
-Boilerplate
+### 3️⃣ Merge All Books into One Dataset
 
-Excess blank lines
-
-3️⃣ Merge All Books into One Dataset
+```bash
 python merge_books.py
-
+```
 
 Creates:
 
-gutenberg_clean.txt
+* `gutenberg_clean.txt`
 
-4️⃣ Train the BPE Tokenizer
+---
+
+### 4️⃣ Train the BPE Tokenizer
+
+```bash
 python train_tokenizer.py
-
+```
 
 Outputs:
 
-gutenberg_bpe.model
+* `gutenberg_bpe.model`
+* `gutenberg_bpe.vocab`
 
-gutenberg_bpe.vocab
+---
 
-5️⃣ Tokenize Dataset (One-Time)
+### 5️⃣ Tokenize Dataset (One-Time)
+
+```bash
 python prepare_dataset.py
-
+```
 
 Creates:
 
-gutenberg_tokens.pt
+* `gutenberg_tokens.pt`
 
-6️⃣ Train the GPT Model
+---
+
+### 6️⃣ Train the GPT Model
+
+```bash
 python train_gpt.py
-
+```
 
 Training features:
 
-Automatic Mixed Precision (AMP)
-
-Learning-rate warmup + cosine decay
-
-Checkpoint saving & resume support
+* Automatic Mixed Precision (**AMP**)
+* Learning-rate warmup + cosine decay
+* Checkpoint saving & resume support
 
 Checkpoints saved to:
 
+```text
 checkpoints/latest.pt
+```
 
-7️⃣ Generate Text
+---
+
+### 7️⃣ Generate Text
+
+```bash
 python generate.py
+```
 
-⚙️ Training Configuration
+---
+
+## ⚙️ Training Configuration
+
+```python
 batch_size = 32
 block_size = 256
 
@@ -179,31 +233,34 @@ learning_rate = 3e-4
 warmup_iters = 2000
 max_iters = 40_000
 dropout = 0.1
+```
 
-🧠 What This Project Demonstrates
+---
 
-Most tutorials:
+## 🧠 What This Project Demonstrates
 
-Load pretrained GPT-2
+**Most tutorials:**
 
-Fine-tune a dataset
+* Load pretrained GPT-2
+* Fine-tune a dataset
+* Hide complexity
 
-Hide complexity
+**FirstWordGPT:**
 
-FirstWordGPT:
+* Builds everything from zero
+* Exposes real training bottlenecks
+* Shows why small models repeat
+* Demonstrates how coherence emerges token by token
 
-Builds everything from zero
+> This is **foundational LLM engineering**, not a wrapper script.
 
-Exposes real training bottlenecks
+---
 
-Shows why small models repeat
+## 📜 License
 
-Demonstrates how coherence emerges token by token
+* **Dataset:** Public Domain (Project Gutenberg)
+* **Code:** Educational / Research Use
 
-This is foundational LLM engineering, not a wrapper script.
+---
 
-📜 License
 
-Dataset: Public Domain (Project Gutenberg)
-
-Code: Educational / Research Use
