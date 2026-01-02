@@ -1,0 +1,32 @@
+gutenberg_books/
+gutenberg_clean/
+gutenberg_clean.txt
+
+*.txt
+*.csv
+*.json
+
+# Tokenized datasets
+*.pt
+
+# SentencePiece models (optional – ignore if regenerable)
+*.model
+*.vocab
+
+# =====================
+# Checkpoints
+# =====================
+checkpoints/
+*.ckpt
+
+# =====================
+# Python cache
+# =====================
+__pycache__/
+
+
+
+
+
+
+
